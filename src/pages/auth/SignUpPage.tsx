@@ -10,7 +10,7 @@ export const SignUpPage = () => {
 
     return (
         <AuthLayout>
-            <div className="card bg-base-100 mt-5 w-full lg:w-2/4 border border-slate-700 shadow-2xl animate-fadein">
+            <div className="card bg-base-300 mt-5 w-full lg:w-2/4 border border-slate-700 shadow-2xl animate-fadein">
                 <div className="card-body">
                     <h2 className="text-center text-3xl font-bold"> Sigh up right now! </h2>
                     <form className="flex gap-5 flex-col" onSubmit={handleSubmit}>
