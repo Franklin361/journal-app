@@ -1,8 +1,8 @@
-import { LoginPage } from "./pages"
+import { LoginPage,SignUpPage } from "./pages"
 
 const App = () => {
   return (
-    <LoginPage/>
+    <SignUpPage/>
   )
 }
 export default App

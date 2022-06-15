@@ -1,2 +1,4 @@
 export * from './Footer'
-export * from './Bloob'
+export * from './ui/Bloob'
+export * from './ui/Button'
+export * from './ui/Input'
