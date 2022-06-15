@@ -1,10 +1,11 @@
 import { Button, Input } from "../../components"
 import { AuthLayout } from "../../layouts"
+import { Link } from 'react-router-dom';
 
 export const LoginPage = () => {
   return (
     <AuthLayout>
-      <div className="card bg-base-100 mt-10 w-full lg:w-2/4 border border-slate-700 shadow-2xl">
+      <div className="card bg-base-100 mt-10 w-full lg:w-2/4 border border-slate-700 shadow-2xl animate-fadein">
         <div className="card-body">
           <h2 className="text-center text-3xl font-bold"> Login right now! </h2>
           <form className="flex gap-5 flex-col">
@@ -23,7 +24,7 @@ export const LoginPage = () => {
             <Button icon="google" label="Google" />
           </div>
           <div className="text-center mt-5">
-            <a className="link text-lg">Create account</a>
+            <Link to="/auth/signup" className="link text-lg">Create account</Link>
           </div>
         </div>
       </div>

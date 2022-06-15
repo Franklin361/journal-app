@@ -1,8 +1,9 @@
-import { LoginPage,SignUpPage } from "./pages"
+import { AppRouter } from "./routes"
 
 const App = () => {
+
   return (
-    <SignUpPage/>
+    <AppRouter/>
   )
 }
 export default App
