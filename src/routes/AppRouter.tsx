@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { MyProfile } from "../components";
-import { LoginPage, SignUpPage } from '../pages';
+import { HomePage, LoginPage, SignUpPage } from '../pages';
 
 
 
@@ -14,6 +14,7 @@ export const AppRouter = () => {
             <Routes>
                 <Route path="auth/login" element={<LoginPage/>}/>
                 <Route path="auth/signup" element={<SignUpPage/>}/>
+                <Route path="/" element={<HomePage/>}/>
 
                 <Route path='/*' element={<Navigate to='auth/login' replace />} />
             </Routes>

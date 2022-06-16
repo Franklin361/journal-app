@@ -10,10 +10,10 @@ export const SignUpPage = () => {
 
     return (
         <AuthLayout>
-            <div className="card bg-base-300 mt-5 w-full lg:w-2/4 border border-slate-700 shadow-2xl animate-fadein">
+            <div className="card mt-10 w-full lg:w-2/4 border border-slate-700 shadow-2xl animate-fadein bg-base-300">
                 <div className="card-body">
                     <h2 className="text-center text-3xl font-bold"> Sigh up right now! </h2>
-                    <form className="flex gap-5 flex-col" onSubmit={handleSubmit}>
+                    <form className="flex gap-0 flex-col" onSubmit={handleSubmit}>
                         <Input
                             type="email" placeholder="example@example"
                             label="Email"
@@ -22,7 +22,6 @@ export const SignUpPage = () => {
                             type="password" placeholder="*****"
                             label="Password"
                         />
-                    
                     <div className="card-actions justify-around mt-5 items-center flex-col lg:flex-row">
                         <Button icon="log-in" label="Create" primary />
                         <span className="flex-1 text-center font-bold text-lg">or</span>

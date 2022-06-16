@@ -1,7 +1,8 @@
 import { IoLogoTiktok } from 'react-icons/io5';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { FaSlackHash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { AiOutlineTwitter, AiOutlineGithub, AiFillLinkedin, AiFillInstagram, AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineTwitter, AiOutlineGithub, AiFillLinkedin, AiFillInstagram, AiOutlineLogin, AiOutlineLogout, AiOutlineMenu } from 'react-icons/ai';
 import { PropsIcon, NameIcon } from "../interfaces";
 
 
@@ -17,7 +18,10 @@ export const Icon = ({name, ...props} : PropsIcon ): JSX.Element => {
         'log-in': <AiOutlineLogin {...props}/>,
         'log-out': <AiOutlineLogout {...props}/>,
         'tiktok': <IoLogoTiktok {...props}/>,
-        'twitter': <AiOutlineTwitter {...props}/>
+        'twitter': <AiOutlineTwitter {...props}/>,
+        'menu': <AiOutlineMenu {...props}/>,
+        'mark': <BsBookmark {...props}/>,
+        'mark-fill': <BsBookmarkFill {...props}/>,
     }
     
 
