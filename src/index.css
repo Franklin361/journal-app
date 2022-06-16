@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 
+.hidden-scroll::-webkit-scrollbar{
+    width: 0;
+}
+.hidden-scroll{
+    scrollbar-width: none;
+}
+
 .animate-fadein {
     animation: fadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -89,5 +96,49 @@
 
     90% {
         transform: translate3d(0, -4px, 0) scaleY(1.02);
+    }
+}
+
+/* SIDEBAR */
+
+.show-nav, .hidde-nav, .transition-nav{
+    transition: all .5s ease-in-out;
+}
+.show-nav{
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.hidde-nav{
+    left: -345px
+}
+
+.p-menu-open {
+    padding-left: 384px;
+}
+.p-menu-close{
+    padding-left: 48px;
+}
+
+@media screen and (max-width:700px) {
+    .p-menu-open{
+        padding-left: 48px;
+    }
+    .p-menu-close{
+        padding-left: 25px;
+    }
+    .show-nav{
+        z-index: 10;
+    }
+    .show-nav::before{
+        content: "";
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.575);
     }
 }

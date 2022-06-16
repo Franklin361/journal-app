@@ -1,6 +1,7 @@
 import { Icon } from "../../assets"
 
 export const ItemNote = () => {
+    console.log('card')
     return (
         <div
             className='min-h-16 flex justify-center items-center gap-7 px-4 py-3  cursor-pointer hover:bg-zinc-900 active:bg-zinc-800'
