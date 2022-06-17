@@ -5,7 +5,7 @@ export const MyProfile = () => {
     const { pathname } = useLocation();
 
     return (
-        <a className={`${ pathname === '/' ? 'hidden' : 'container-profile'}`} 
+        <a className={`profile ${ pathname === '/' ? '' : 'fixed-profile'}`} 
             href='https://franklin-dev.netlify.app' target='_blank'>
             <img
                 src='https://res.cloudinary.com/dnxchppfm/image/upload/v1646245949/perfil_vpgbfg.webp'

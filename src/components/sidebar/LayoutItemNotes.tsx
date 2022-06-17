@@ -15,7 +15,7 @@ export const LayoutItemNotes = memo(({ items }: LayoutProps) => {
     return (
         <div className='overflow-y-scroll h-4/6 hidden-scroll'>
             {
-                !(items.length === 0)
+                (items.length === 0)
                     ? <NotFoundElements {...props}/>
                     : items.map(item => (
                         <ItemNote key={item} />

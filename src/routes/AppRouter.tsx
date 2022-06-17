@@ -10,7 +10,7 @@ export const AppRouter = () => {
 
     return (
         <BrowserRouter>
-        <MyProfile/>
+
             <Routes>
                 <Route path="auth/login" element={<LoginPage/>}/>
                 <Route path="auth/signup" element={<SignUpPage/>}/>

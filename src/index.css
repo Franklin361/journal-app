@@ -10,11 +10,33 @@
     scrollbar-width: none;
 }
 
-.animate-fadein {
-    animation: fadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+.up-down-animation{
+    animation: fadeInMoveUpDown 1s ease-in-out;
 }
 
-@keyframes fadeIn {
+.animate-fadein {
+    animation: fadeInMove 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.modal-view {
+    animation: fadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.modal-view > img {
+    animation: fadeInMove .8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes fadeInMoveUpDown {
+    0% {
+        opacity: 0;
+        transform: translateYC(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateYC(0);
+    }
+}
+@keyframes fadeInMove {
     0% {
         opacity: 0;
         transform: translateY(100%);
@@ -25,15 +47,24 @@
         transform: translateY(0);
     }
 }
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        /* transform: translateY(100%); */
+    }
+
+    100% {
+        opacity: 1;
+        /* transform: translateY(0); */
+    }
+}
 
 /* MyProfile */
 
-.container-profile {
+.profile {
     background-color: rgb(0, 0, 0);
-    position: fixed;
-    top: .5em;
-    left: 5px;
-    z-index: 999;
+    
+    z-index: 9;
     text-decoration: none;
     color: white;
     display: flex;
@@ -44,8 +75,19 @@
     padding: 5px;
     border-radius: 35px;
 }
+.fixed-profile {
+    position: fixed;
+    top: .5em;
+    left: 5px;
+}
+.home{
+    top: auto;
+    bottom: 1em;
+    right: 1em;
+    left: auto;
+}
 
-.container-profile>p {
+.profile>p {
     padding: 0 1em 0 0;
     font-weight: bold;
     display: flex;
@@ -53,16 +95,16 @@
     flex-direction: column;
 }
 
-.container-profile>p>span {
+.profile>p>span {
     font-size: .8em;
     color: rgb(209, 206, 206);
 }
-.container-profile>img{
+.profile>img{
     transform-origin: center bottom;
     animation: bounce 1s linear;
     animation-delay: 5s;
 }
-.container-profile:hover>img {
+.profile:hover>img {
     transform-origin: center bottom;
     animation: bounce 1s linear infinite;
     animation-delay: 0s;
