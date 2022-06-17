@@ -9,7 +9,7 @@ export const MainLayout = ({ children }: ElementJSX) => {
     const showHideSidebar = () => setChange(!change);
 
     return (
-        <div className={`h-screen transition-nav ${ change ?'p-menu-open' :'p-menu-close'}`}>
+        <div className={`h-screen transition-nav`}>
            <SideBar {...{showHideSidebar, change}} />
             {children}
         </div>

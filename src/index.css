@@ -111,23 +111,10 @@
 }
 
 .hidde-nav{
-    left: -345px
-}
-
-.p-menu-open {
-    padding-left: 384px;
-}
-.p-menu-close{
-    padding-left: 48px;
+    left: -390px
 }
 
 @media screen and (max-width:700px) {
-    .p-menu-open{
-        padding-left: 48px;
-    }
-    .p-menu-close{
-        padding-left: 25px;
-    }
     .show-nav{
         z-index: 10;
     }

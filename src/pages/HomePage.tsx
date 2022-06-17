@@ -6,12 +6,12 @@ export const HomePage = () => {
 
   return (
     <MainLayout>
-      <div className="w-11/12 m-auto h-screen">
+      <div className="w-full h-screen">
         <HeaderNoteSelected/>
 
-        {/* <NoteSelectedView/> */}
+        <NoteSelectedView/>
 
-        <NothigSelectedView/>
+        {/* <NothigSelectedView/> */}
 
       </div>
     </MainLayout>
