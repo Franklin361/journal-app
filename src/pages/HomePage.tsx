@@ -1,4 +1,4 @@
-import { HeaderNoteSelected, NoteSelectedView, NothigSelectedView } from "../components"
+import { HeaderHome, NoteSelectedView, NothigSelectedView } from "../components"
 import { MainLayout } from "../layouts"
 
 export const HomePage = () => {
@@ -7,7 +7,7 @@ export const HomePage = () => {
   return (
     <MainLayout>
       <div className="w-full h-screen">
-        <HeaderNoteSelected/>
+        <HeaderHome/>
 
         <NoteSelectedView/>
 

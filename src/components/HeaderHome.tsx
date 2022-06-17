@@ -1,7 +1,7 @@
-import { Button } from './';
+import { Button } from '.';
 import { MyProfile } from './MyProfile';
 
-export const HeaderNoteSelected = () => {
+export const HeaderHome = () => {
     return (
         <header className="h-46 flex justify-between items-center bg-neutral px-5 sm:flex-row sm:h-24 flex-col py-5 gap-5">
 

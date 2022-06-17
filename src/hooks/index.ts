@@ -1,2 +1,2 @@
 export * from './useChangeTheme'
-export * from './useUploadImage'
+export * from './useStore'
