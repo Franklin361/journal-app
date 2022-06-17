@@ -17,10 +17,12 @@ export const SignUpPage = () => {
                         <Input
                             type="email" placeholder="example@example"
                             label="Email"
+                            primary
                         />
                         <Input
                             type="password" placeholder="*****"
                             label="Password"
+                            primary
                         />
                     <div className="card-actions justify-around mt-5 items-center flex-col lg:flex-row">
                         <Button icon="log-in" label="Create" primary />

@@ -1,19 +1,24 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+
 export const useChangeTheme = () => {
     
     useEffect(() => {
-        const theme = localStorage.getItem('theme') ?? 'dark';
+        const theme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute("data-theme", theme);
     }, [])
 
 
-    const handleChangeTheme = () => {
-        const currentTheme = localStorage.getItem('theme') ?? 'dark';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const handleChangeTheme = useCallback(
+        () => {
+        
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            console.log({currentTheme})
+            const newTheme = currentTheme === 'dark' ? 'synthwave' : 'dark';
+            console.log({newTheme})
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem('theme', newTheme);
+        },[]
+    )
 
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem('theme', newTheme);
-    }
-
-    return handleChangeTheme;
+    return {handleChangeTheme};
 }

@@ -8,8 +8,8 @@ export const SideBar = ({ showHideSidebar, change }:{showHideSidebar: ()=>void, 
     
     
     return (
-        <aside className={`h-screen bg-black max-w-sm flex fixed left-0 top-0 z-50 ${!change ? 'hidde-nav' : 'show-nav'}`}>
-            <div className='bg-black'>
+        <aside className={`h-screen bg-neutral max-w-sm flex fixed left-0 top-0 z-50 ${!change ? 'hidde-nav' : 'show-nav'}`}>
+            <div className=''>
 
                 <HeaderSideBar />
 
@@ -27,7 +27,7 @@ export const SideBar = ({ showHideSidebar, change }:{showHideSidebar: ()=>void, 
                 <LayoutItemNotes items={items}/>
             </div>
             <button
-                className='min-h-screen bg-black w-16 flex justify-center items-center shadow shadow-white/10  active:bg-zinc-900'
+                className='min-h-screen bg-neutral w-16 flex justify-center items-center shadow shadow-white/10  active:bg-zinc-900'
                 onClick={showHideSidebar}
             >
                 <Icon name='arrow-double' />
