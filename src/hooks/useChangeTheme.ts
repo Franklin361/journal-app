@@ -12,9 +12,9 @@ export const useChangeTheme = () => {
         () => {
         
             const currentTheme = localStorage.getItem('theme') || 'dark';
-            console.log({currentTheme})
-            const newTheme = currentTheme === 'dark' ? 'synthwave' : 'dark';
-            console.log({newTheme})
+            
+            const newTheme = currentTheme === 'dark' ? 'black' : 'dark';
+            
             document.documentElement.setAttribute("data-theme", newTheme);
             localStorage.setItem('theme', newTheme);
         },[]
