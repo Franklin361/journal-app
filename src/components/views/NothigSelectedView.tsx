@@ -12,7 +12,7 @@ export const NothigSelectedView = () => {
         <NotFoundElements 
             {...props}
             titleClass='text-4xl lg:text-7xl text-4xl mb-5'
-            imageClass=' lg:w-96'
+            imageClass=' lg:w-96 up-down-animation'
             subtitleClass='text-xl'
         />
     </div>

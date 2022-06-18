@@ -1,8 +1,9 @@
 import { memo } from 'react';
 import { ItemNote, NotFoundElements } from '..';
+import { Note } from '../../interfaces';
 
 interface LayoutProps {
-    items: number[]
+    items: Note[]
 }
 
 const props = {
@@ -18,7 +19,7 @@ export const LayoutItemNotes = memo(({ items }: LayoutProps) => {
                 (items.length === 0)
                     ? <NotFoundElements {...props}/>
                     : items.map(item => (
-                        <ItemNote key={item} />
+                        <ItemNote {...item} key={item.id}/>
                     ))
             }
         </div>

@@ -8,7 +8,6 @@ export const NoteSelectedView = () => {
   return (
     <main className="px-5 w-5/6 mx-auto">
 
-      <HeaderNote />
 
       <section className="sm:overflow-y-scroll h-full hidden-scroll pb-5">
         

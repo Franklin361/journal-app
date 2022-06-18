@@ -1,5 +1,6 @@
 export * from './Footer'
 export * from './ModalImage'
+export * from './Spinner'
 export * from './FormNote'
 export * from './MyProfile'
 export * from './HeaderHome'

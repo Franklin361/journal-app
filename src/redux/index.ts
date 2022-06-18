@@ -1,3 +1,7 @@
 export * from './modal/modalSlice'
 export * from './uploadImage/uploadImageSlice'
+export * from './note/noteSlice'
+export * from './note/thunk'
+export * from './auth/authSlice'
+export * from './auth/thunk'
 export * from './store'
