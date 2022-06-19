@@ -3,6 +3,7 @@ import { useRef, useMemo } from 'react';
 import { startSaveNote} from "../redux";
 import { Button } from './';
 import { Spinner } from "./Spinner";
+import toast from 'react-hot-toast';
 
 export const HeaderNote = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +24,15 @@ export const HeaderNote = () => {
 
     const onInputFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
-        dispatch(startSaveNote([...e.target.files]))
+        const files = [...e.target.files];
+        let errors = 0;
+
+        files.forEach( file => {
+            if(!(file.type.includes('image'))) errors++
+        })
+
+        if(errors ===0) dispatch(startSaveNote([...e.target.files]))
+        else toast('Only images are accepted', {icon: '😥' })
     }
 
     return (

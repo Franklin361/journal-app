@@ -64,11 +64,11 @@ export const startLoadingNotes = () => {
 
 export const startAskSaveNote = (nextNote: NoteComplete) => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
-
+        
         const { notes } = getState().note
         const { formState } = getState().form
-
         if (!formState) {
+            
             dispatch(setActiveNote(nextNote));
             return;
         }
@@ -97,14 +97,14 @@ export const startSaveNote = (imagesList?: File[]) => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
 
         const { uid } = getState().auth;
-        const { active: note } = getState().note;
+        const { active: note, nextNote } = getState().note;
         const { formState } = getState().form
 
         let imageUrls: string[] = [];
 
         if (imagesList) {
 
-            if (note?.imageUrls && note.imageUrls.length >= 3) return toast('Only 4 images by note in version Free', { icon: '😥' });
+            if (note?.imageUrls && note.imageUrls.length === 3) return toast('Only 3 images by note in version Free', { icon: '😥' });
 
             dispatch(setSaving());
             const fileUploadPromises = []
@@ -129,7 +129,8 @@ export const startSaveNote = (imagesList?: File[]) => {
             await setDoc(docRef, noteToFireStore, { merge: true });
 
             dispatch(updateNote(newNote));
-            dispatch(setActiveNote(newNote));
+            dispatch(setActiveNote(nextNote ? nextNote : newNote));
+            
             toast.success('Note updated successfully! ✅', { position: 'bottom-right' })
         }
     }
