@@ -5,7 +5,6 @@ export const useForm = <T>( initialForm: T ) => {
     const [ formState, setFormState ] = useState( initialForm );
 
     useEffect(() => {
-        console.log('a')
         setFormState( initialForm );
     }, [ initialForm ])
 

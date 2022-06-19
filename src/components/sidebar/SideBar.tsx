@@ -8,7 +8,7 @@ export const SideBar = ({ showHideSidebar, change }:{showHideSidebar: ()=>void, 
     
     const dispatch = useAppDispatch();
     const { isSaving, notes } = useAppSelector(state => state.note)
-
+    
     const onCreateNote = () => dispatch(startNewNote())
     
     return (

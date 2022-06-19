@@ -2,13 +2,14 @@ import { Icon } from "../../assets"
 import { Note } from "../../interfaces"
 import { useMemo } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/useStore';
-import { setActiveNote } from "../../redux";
+import { startAskSaveNote } from "../../redux";
 
 export const ItemNote = (note: Note) => {
     const { body, date, id, imageUrls, title } = note
+
     const { active, isSaving } = useAppSelector(state => state.note)
     const dispatch = useAppDispatch()
-
+    console.log('first')
     const isAcive = useMemo( ()=> active?.id === id, [active]) 
     
     const newTitle = useMemo( () => {
@@ -25,9 +26,12 @@ export const ItemNote = (note: Note) => {
             ? body.substring(0,34) + '...'
             : body;
         }
-    },[ title ]);
+    },[ body ]);
 
-    const onActiveNote = () => dispatch(setActiveNote(note))
+    const onActiveNote = () => {
+
+        dispatch(startAskSaveNote(note))
+    }
 
     return (
         <div

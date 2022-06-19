@@ -5,12 +5,14 @@ interface NoteState {
     isSaving: boolean;
     notes: Note[];
     active: Note | null;
+    askSaveNote: boolean;
 }
 
 const initialState: NoteState = {
     isSaving: false,
     notes: [],
-    active: null
+    active: null,
+    askSaveNote: true
 }
 
 export const noteSlice = createSlice({
@@ -28,6 +30,7 @@ export const noteSlice = createSlice({
         },
         
         setActiveNote: (state, action:PayloadAction<Note>) => {
+            
             state.active = action.payload;
         },
         
@@ -66,6 +69,9 @@ export const noteSlice = createSlice({
             state.active = null;
             state.notes = state.notes.filter(note => note.id !== action.payload);
         },
+        askSaveNote: (state, action:PayloadAction<boolean>) => {
+            state.askSaveNote = action.payload;
+        }
     }
 });
 
@@ -78,6 +84,7 @@ export const {
     setNotes,
     setPhotosToActiveNote,
     setSaving,
+    askSaveNote,
     updateNote } = noteSlice.actions;
 
 export default noteSlice.reducer

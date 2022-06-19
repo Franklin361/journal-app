@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { useRef, useMemo } from 'react';
-import { uploadImage } from "../redux";
+import { startSaveNote, uploadImage } from "../redux";
 import { Button } from './';
 
 export const HeaderNote = () => {
     const dispatch = useAppDispatch();
-    const { active } = useAppSelector(state => state.note);
+    const { active, isSaving } = useAppSelector(state => state.note);
 
     const dateString = useMemo(() => {
         if (active && active?.date) {
@@ -14,6 +14,8 @@ export const HeaderNote = () => {
         }
     }, [active])
 
+    const onSaveNote = () =>  dispatch(startSaveNote());
+    
 
     const fileRef = useRef<HTMLInputElement>(null);
     const onUploadImage = () => fileRef.current?.click();
@@ -43,6 +45,7 @@ export const HeaderNote = () => {
                     className="btn-ghost btn-outline sm:w-auto w-30 sm:flex-none"
                     onClick={onUploadImage}
                     type="button"
+                    disabled={isSaving}
                 />
                 <Button
                     type="submit"
@@ -50,6 +53,8 @@ export const HeaderNote = () => {
                     label="Save Note"
                     className="sm:flex-none sm:w-auto w-30"
                     primary
+                    onClick={onSaveNote}
+                    disabled={isSaving}
                 />
             </div>
         </header>

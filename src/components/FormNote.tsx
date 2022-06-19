@@ -1,18 +1,23 @@
+import { useEffect } from 'react';
 import { Input } from './';
-import { useAppSelector,useForm } from '../hooks';
+import { useAppSelector,useForm, useAppDispatch } from '../hooks';
 import { HeaderNote } from '.';
-import { useMemo } from 'react';
 import { Note } from '../interfaces';
+import { setActiveNote } from '../redux';
 
 export const FormNote = () => {
 
+    const dispatch = useAppDispatch();
     const { active } = useAppSelector(state => state.note)
     const { formState, onInputChange, body, title } = useForm<Note>(active!)
 
     const onSumbit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log(formState)
+        e.preventDefault()
     }
+
+    useEffect(() => {
+        dispatch( setActiveNote(formState) );
+    }, [formState])
 
     return (
         <form className="flex flex-col gap-5" onSubmit={onSumbit}>
