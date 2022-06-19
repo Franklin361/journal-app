@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 interface ModalImageState {
     isOpen:boolean;
     image: string;
-    type: 'image' | 'ask'
+    type: 'image' | 'ask'| 'delete'
 }
 
 type ModalAction = { image: string };
@@ -32,9 +32,13 @@ export const modalImageSlice = createSlice({
       state.isOpen = true;
       state.type = 'ask'
     },
+    openModalDelete: (state) => {
+      state.isOpen = true;
+      state.type = 'delete'
+    },
   },
 })
 
-export const { onCloseModal, onOpenModal, openModalAsk } = modalImageSlice.actions
+export const { onCloseModal, onOpenModal, openModalAsk, openModalDelete } = modalImageSlice.actions
 
 export default modalImageSlice.reducer

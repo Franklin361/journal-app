@@ -3,20 +3,22 @@ import { Input } from './';
 import { useAppSelector,useForm, useAppDispatch } from '../hooks';
 import { HeaderNote } from '.';
 import { Note } from '../interfaces';
-import { setActiveNote } from '../redux';
+import { setActiveNote, setForm, startSaveNote } from '../redux';
 
 export const FormNote = () => {
 
     const dispatch = useAppDispatch();
-    const { active } = useAppSelector(state => state.note)
+    const { active } = useAppSelector(state => state.note);
     const { formState, onInputChange, body, title } = useForm<Note>(active!)
 
     const onSumbit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
+        dispatch( setActiveNote(formState) );   
+        dispatch( startSaveNote() );   
     }
 
     useEffect(() => {
-        dispatch( setActiveNote(formState) );
+        dispatch( setForm(formState) );
     }, [formState])
 
     return (

@@ -1,12 +1,13 @@
 import { Dispatch } from '@reduxjs/toolkit';
-import { collection, doc, setDoc } from 'firebase/firestore/lite';
+import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseDB } from '../../firebase/config';
 import { RootState, addNewEmptyNote, savingNewNote, setActiveNote } from '../';
-import { askSaveNote, setNotes, setSaving, updateNote } from './noteSlice';
-import { loadNotes } from '../../utils';
+import { deleteNoteById, setNextNote, setNotes, setSaving, updateNote } from './noteSlice';
+import { fileUpload, loadNotes } from '../../utils';
 import toast from 'react-hot-toast';
 import { Note as NoteComplete } from '../../interfaces/note';
 import { openModalAsk } from '../modal/modalSlice';
+import { resetForm, setForm } from '../form/formSlice';
 
 interface Note extends Record<string, any> {
     title: string,
@@ -17,69 +18,34 @@ interface Note extends Record<string, any> {
 export const startNewNote = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
 
-        const { notes, active, askSaveNote: isWantingSave } = getState().note
-        // TODO: refactorizar los if
-        // TODO: refactorizar los nombres de la variable isWantingSave y funcion y estado
-        console.log(isWantingSave)
-        if (active && isWantingSave) {
+        const { uid } = getState().auth;
+        const { notes } = getState().note;
+        const { formState } = getState().form
 
-            const noteSearch = notes.find(item => item.id === active.id);
+        if (notes.length === 4) return toast('Version free, you can only have 4 notes!', { position: 'top-left', icon: '😞' });
 
-            if (noteSearch?.body?.trim() !== active.body?.trim() ||
-                noteSearch?.title?.trim() !== active.title?.trim()
-            ) {
-                dispatch(openModalAsk());
+        dispatch(savingNewNote());
 
-            } else {
-                dispatch(savingNewNote());
-
-                const { uid } = getState().auth;
-
-                const newNote: Note = {
-                    title: '',
-                    body: '',
-                    date: new Date().getTime(),
-                }
-
-                try {
-                    const newDoc = doc(collection(FirebaseDB, `${uid}/journal/notes`));
-                    await setDoc(newDoc, newNote);
-
-                    newNote.id = newDoc.id;
-
-                    dispatch(addNewEmptyNote(newNote as any));
-                    dispatch(setActiveNote(newNote as any));
-
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-        } else {
-            dispatch(savingNewNote());
-
-            const { uid } = getState().auth;
-
-            const newNote: Note = {
-                title: '',
-                body: '',
-                date: new Date().getTime(),
-            }
-
-            try {
-                const newDoc = doc(collection(FirebaseDB, `${uid}/journal/notes`));
-                await setDoc(newDoc, newNote);
-
-                newNote.id = newDoc.id;
-
-                dispatch(addNewEmptyNote(newNote as any));
-                dispatch(setActiveNote(newNote as any));
-
-            } catch (error) {
-                console.log(error)
-            }
+        const newNote: Note = {
+            title: '',
+            body: '',
+            date: new Date().getTime(),
         }
 
+        const newDoc = doc(collection(FirebaseDB, `${uid}/journal/notes`));
+        await setDoc(newDoc, newNote);
 
+        newNote.id = newDoc.id;
+
+        dispatch(addNewEmptyNote(newNote as any));
+
+        if (isChangeActiveNote(notes, formState)) {
+            dispatch(setNextNote(newNote as any))
+            dispatch(openModalAsk());
+            return;
+        }
+
+        dispatch(setActiveNote(newNote as any));
 
     }
 }
@@ -96,54 +62,118 @@ export const startLoadingNotes = () => {
 }
 
 
-export const startAskSaveNote = (note: NoteComplete) => {
+export const startAskSaveNote = (nextNote: NoteComplete) => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
 
-        const { notes, active, askSaveNote: isWantingSave } = getState().note
-        // TODO: refactorizar los if
-        // TODO: refactorizar los nombres de la variable isWantingSave y funcion y estado
-        if (active && isWantingSave) {
+        const { notes } = getState().note
+        const { formState } = getState().form
 
-            const noteSearch = notes.find(item => item.id === active.id);
-
-            if (noteSearch?.body?.trim() !== active.body?.trim() ||
-                noteSearch?.title?.trim() !== active.title?.trim()
-            ) {
-                dispatch(openModalAsk());
-
-            } else {
-                dispatch(setActiveNote(note))
-            }
-        } else {
-            dispatch(askSaveNote(true))
-            dispatch(setActiveNote(note))
+        if (!formState) {
+            dispatch(setActiveNote(nextNote));
+            return;
         }
 
+        if (isChangeActiveNote(notes, formState)) {
+            dispatch(setNextNote(nextNote))
+            dispatch(openModalAsk());
+            return;
+        }
 
+        dispatch(setActiveNote(nextNote));
     }
 }
 
-export const startSaveNote = () => {
+const isChangeActiveNote = (notes: NoteComplete[], active: NoteComplete | null) => {
+    if (!active) return false;
+    const noteSearch = notes.find(item => item.id === active.id);
+
+    const isChangeBody = noteSearch?.body?.trim() !== active.body?.trim();
+    const isChangeTitle = noteSearch?.title?.trim() !== active.title?.trim();
+
+    return isChangeBody || isChangeTitle
+}
+
+export const startSaveNote = (imagesList?: File[]) => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
-        console.log('gu')
-        dispatch(setSaving());
 
         const { uid } = getState().auth;
-        const { active: note, askSaveNote: askme } = getState().note;
+        const { active: note } = getState().note;
+        const { formState } = getState().form
 
+        let imageUrls: string[] = [];
+
+        if (imagesList) {
+
+            if (note?.imageUrls && note.imageUrls.length >= 3) return toast('Only 4 images by note in version Free', { icon: '😥' });
+
+            dispatch(setSaving());
+            const fileUploadPromises = []
+            for (const file of imagesList) {
+                fileUploadPromises.push(fileUpload(file))
+            }
+            imageUrls = await Promise.all(fileUploadPromises);
+        }
+
+        dispatch(setSaving());
+        let newNote: NoteComplete = {
+            ...note!,
+            ...(formState ? { ...formState } : {}),
+            imageUrls: [...imageUrls, ...(note && note?.imageUrls ? [...note.imageUrls] : [])]
+        }
 
         if (note) {
 
-            // if(askme) dispatch(askSaveNote(false));
-
-            const { id, ...noteToFireStore } = note;
+            const { id, ...noteToFireStore } = newNote;
 
             const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`);
             await setDoc(docRef, noteToFireStore, { merge: true });
 
-            dispatch(updateNote(note));
+            dispatch(updateNote(newNote));
+            dispatch(setActiveNote(newNote));
             toast.success('Note updated successfully! ✅', { position: 'bottom-right' })
         }
+    }
+}
 
+
+export const startDeletingImage = (url: string) => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
+        
+        const { uid } = getState().auth;
+        const { active: note } = getState().note;
+        
+        if (note) {
+            dispatch(setSaving())
+
+            const imageUrls = note.imageUrls?.filter(img => img !== url);
+            const newNote ={
+                ...note,
+                imageUrls
+            }
+            
+
+            const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note!.id}`);
+            await setDoc(docRef, newNote, { merge: true });
+
+            toast.success('Image deleted successfully')
+
+            dispatch(updateNote(newNote));
+            dispatch(setActiveNote(newNote));
+        }
+    }
+}
+
+export const startDeletingNote = () => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
+
+        const { uid } = getState().auth;
+        const { active: note } = getState().note;
+
+        const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note!.id}`);
+        await deleteDoc(docRef);
+
+        toast.success('Note deleted successfully')
+        dispatch(resetForm())
+        dispatch(deleteNoteById(note!.id));
     }
 }

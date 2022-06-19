@@ -4,7 +4,7 @@ import { FiMoon, FiSun, FiUpload } from 'react-icons/fi';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { FaSlackHash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { AiOutlineTwitter, AiOutlineGithub, AiFillLinkedin, AiFillInstagram, AiOutlineLogin, AiOutlineLogout, AiOutlineMenu, AiOutlineDoubleRight, AiOutlineSave, AiOutlineCloseCircle } from 'react-icons/ai';
+import { AiOutlineTwitter, AiOutlineGithub, AiFillLinkedin, AiFillInstagram, AiOutlineLogin, AiOutlineLogout, AiOutlineMenu, AiOutlineDoubleRight, AiOutlineSave,AiOutlineDelete, AiOutlineCloseCircle } from 'react-icons/ai';
 import { PropsIcon, NameIcon } from "../interfaces";
 
 
@@ -30,7 +30,8 @@ export const Icon = ({name, ...props} : PropsIcon ): JSX.Element => {
         'moon':  <FiMoon {...props}/>,
         'sun': <FiSun {...props}/>,
         'upload': <FiUpload {...props}/>,
-        'close': <AiOutlineCloseCircle {...props}/>
+        'close': <AiOutlineCloseCircle {...props}/>,
+        'delete': <AiOutlineDelete {...props}/>,
     }
     
 
