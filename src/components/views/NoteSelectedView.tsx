@@ -1,4 +1,4 @@
-import { FormNote, CarrouselLayout, ModalImage } from '..';
+import { FormNote, CarrouselLayout, ModalLayout } from '..';
 import { useAppSelector,useAppDispatch } from '../../hooks';
 import { Button } from '../';
 import { openModalDelete } from '../../redux';
@@ -27,7 +27,7 @@ export const NoteSelectedView = () => {
 
       </section>
 
-      <ModalImage />
+      <ModalLayout />
 
     </main >
   )

@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { TypeModal } from '../../interfaces';
 
 interface ModalImageState {
     isOpen:boolean;
     image: string;
-    type: 'image' | 'ask'| 'delete'
+    type: TypeModal
 }
 
 type ModalAction = { image: string };

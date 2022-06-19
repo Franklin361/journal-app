@@ -1,0 +1,1 @@
+export type TypeModal = 'image' | 'ask'| 'delete';

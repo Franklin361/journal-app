@@ -1,13 +1,13 @@
-import { Button } from '..';
+
+import { Icon } from '../../assets';
 import { useAppDispatch } from '../../hooks/';
 import {  onOpenModal, startDeletingImage } from '../../redux';
 
 interface Props {
     item: string;
-    index: number;
 }
 
-export const CarrouselItem = ({ item, index }: Props) => {
+export const CarrouselItem = ({ item }: Props) => {
     
     const dispatch = useAppDispatch();
 
@@ -23,12 +23,11 @@ export const CarrouselItem = ({ item, index }: Props) => {
                 className="rounded-box w-80 object-cover cursor-pointer transition-all ease-in hover:scale-105"
             />
             
-            <Button
-                secondary
-                icon="close"
-                className="absolute rounded-full -right-4 -top-2 w-auto"
-                onClick={onDeleteImage}
-            />
+            <button 
+            className='rounded-full bg-red-500 absolute w-12 h-12 flex justify-center items-center -top-3 -right-3 hover:bg-red-600 active:bg-red-400 btn p-0 border-none   '  
+            onClick={onDeleteImage}>
+                <Icon name='delete'  className='text-white text-2xl'/>
+            </button>
         </div>
     )
 }

@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.image-max{
+    min-width: 650px;
+    max-width: 800px;
+    max-height: fit-content;
+}
+.image-max > img {
+    object-fit: contain;
+}
 .hidden-scroll::-webkit-scrollbar{
     width: 0;
 }
