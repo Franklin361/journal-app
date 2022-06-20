@@ -14,7 +14,8 @@ export const ModalSaveChanges = () => {
 
     const onSaveNote = () => {
         dispatch(startSaveNote());
-        
+        dispatch(setActiveNote(nextNote!))
+        dispatch(onCloseModal())
     }
 
     return (

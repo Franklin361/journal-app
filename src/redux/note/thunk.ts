@@ -130,7 +130,7 @@ export const startSaveNote = (imagesList?: File[]) => {
 
             dispatch(updateNote(newNote));
             dispatch(setActiveNote(nextNote ? nextNote : newNote));
-            
+            dispatch(setNextNote(null))
             toast.success('Note updated successfully! ✅', { position: 'bottom-right' })
         }
     }
