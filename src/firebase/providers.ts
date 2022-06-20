@@ -72,6 +72,10 @@ const showError = (e: unknown) => {
     const error = e as FirebaseError
     const errorCode = error.code;
     const errorMessage = `${error.message} - ${errorCode}`;
-    console.log(error)
-    toast.error(errorMessage);
+    
+    switch (errorCode) {
+        case 'auth/email-already-in-use': toast.error('That email already exists!'); break;
+        case 'auth/wrong-password': toast.error('Email / password invalid!'); break;
+        default: toast.error(errorMessage); break;
+    }
 }
