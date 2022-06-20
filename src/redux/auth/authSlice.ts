@@ -1,14 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuhtState } from '../../interfaces';
 
-type Status = 'checking' | 'not-authenticated' | 'authenticated'
-
-interface AuhtState {
-    status: Status
-    uid: string | null,
-    email: string | null,
-    displayName: string | null,
-    photoURL: string | null,
-}
 
 const initialState: AuhtState = {
     status: 'checking',
@@ -20,8 +12,8 @@ const initialState: AuhtState = {
 
 type LoginAction = Pick<AuhtState, "uid" | "email" | "displayName" | "photoURL">
 
-export const auhtSlice = createSlice({
-    name: 'auht',
+export const authSlice = createSlice({
+    name: 'auth',
     initialState,
     reducers: {
         login: (state, { payload }: PayloadAction<LoginAction>) => {
@@ -46,6 +38,6 @@ export const auhtSlice = createSlice({
     }
 });
 
-export const { checkingCredentials, login, logout } = auhtSlice.actions;
+export const { checkingCredentials, login, logout } = authSlice.actions;
 
-export default auhtSlice.reducer
+export default authSlice.reducer
