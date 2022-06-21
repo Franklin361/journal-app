@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest --verbose=true"
+    "test": "jest --verbose=true --watchAll"
   },
   "dependencies": {
     "@cloudinary/react": "^1.4.1",

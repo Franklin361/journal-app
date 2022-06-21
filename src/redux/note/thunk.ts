@@ -1,13 +1,13 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseDB } from '../../firebase/config';
-import { RootState, addNewEmptyNote, savingNewNote, setActiveNote } from '../';
+import { RootState, addNewEmptyNote, setActiveNote } from '../';
 import { deleteNoteById, setNextNote, setNotes, setSaving, updateNote } from './noteSlice';
 import { fileUpload, loadNotes } from '../../utils';
 import toast from 'react-hot-toast';
 import { Note as NoteComplete } from '../../interfaces/note';
 import { openModalAsk } from '../modal/modalSlice';
-import { resetForm, setForm } from '../form/formSlice';
+import { resetForm } from '../form/formSlice';
 
 interface Note extends Record<string, any> {
     title: string,
@@ -24,7 +24,7 @@ export const startNewNote = () => {
 
         if (notes.length === 4) return toast('Version free, you can only have 4 notes!', { position: 'top-left', icon: '😞' });
 
-        dispatch(savingNewNote());
+        dispatch(setSaving());
 
         const newNote: Note = {
             title: '',
@@ -100,7 +100,7 @@ export const startSaveNote = (imagesList?: File[]) => {
         const { active: note, nextNote } = getState().note;
         const { formState } = getState().form
 
-        let imageUrls: string[] = [];
+        let imageUrls: any[] = [];
 
         if (imagesList) {
 
