@@ -14,8 +14,8 @@ interface FormState {
 }
 
 const initalState: FormState = {
-  email:'correo@correo.com',
-  password: '1234567'
+  email:'',
+  password: ''
 }
 
 const formValidations: { [key in keyof FormState]: [(value: any) => boolean, string] } = {

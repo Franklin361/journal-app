@@ -13,9 +13,9 @@ interface FormState {
 }
 
 const initalState: FormState = {
-    displayName: 'Franklin',
-    email: 'correo@correo.com',
-    password: '1234567'
+    displayName: '',
+    email: '',
+    password: ''
 }
 
 const formValidations: { [key in keyof FormState]: [(value: any) => boolean, string] } = {
