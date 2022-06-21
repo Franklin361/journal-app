@@ -6,8 +6,11 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: { },
   },
   plugins: [require("daisyui")],
-  
+  daisyui: {
+    themes: ["dark"],
+    darkTheme: "dark",
+  },
 }
