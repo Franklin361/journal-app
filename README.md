@@ -1,4 +1,4 @@
-# Jounar Notes ✍️
+# Journal Notes ✍️
 
 **Web application to create your own notes, which you can view each of your notes, edit your notes, and even delete them if you no longer need them.** <br/>
 **But also, you can add or delete images inside your notes!**
