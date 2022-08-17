@@ -5,7 +5,7 @@
 
 <br/>
 
-![Project view](https://res.cloudinary.com/dnxchppfm/image/upload/v1655835555/journal-gif_cgevgz.gif)
+![Project view](https://res.cloudinary.com/dnxchppfm/image/upload/v1655835325/journal_xanz0t.png)
 
 <br/>
 
