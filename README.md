@@ -5,7 +5,7 @@
 
 <br/>
 
-![Project view](https://res.cloudinary.com/dnxchppfm/image/upload/v1655835325/journal_xanz0t.png)
+![Project view](https://res.cloudinary.com/dnxchppfm/image/upload/v1655835325/franklin-page/journal_xanz0t.png)
 
 <br/>
 
@@ -20,7 +20,7 @@
 - Delete notes.
 - Delete photos from notes.
 
----
+
 <br/>
 
 ## Technologies used. 🧪
@@ -35,7 +35,7 @@
     - Daisy UI (Tailwind CSS component library).
 -  Cloudinary (image storage).
 
----
+
 <br/>
 
 ## Instalation. 🚀
@@ -82,7 +82,7 @@
 ```bash
  npm run dev
 ```
----
+
 <br/>
 
 ## Link. ⛓️
